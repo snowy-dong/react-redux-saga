@@ -12,6 +12,7 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 var loadMinified = require('./load-minified');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var cleanWebpaclPlugin = require('clean-webpack-plugin');
 var env = config.build.env;
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -27,7 +28,9 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  mode: 'production', //development  production ( 生产环境会将代码压缩 )
   plugins: [
+    new cleanWebpaclPlugin(path.join(__dirname,'dist')),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
@@ -67,8 +70,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../src/static'),
-        to: config.build.assetsSubDirectory,
+        from: path.resolve(__dirname, '../src/static'),//静态资源目录源地址
+        to: config.build.assetsSubDirectory, //目标地址，相对于output的path目录
         ignore: ['.*']
       }
     ]),

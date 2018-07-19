@@ -10,6 +10,7 @@ var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //独立打包css文件插件
 var Happypack = require('happypack');
 var happypackThreadPool = Happypack.ThreadPool({size:4});//size:os.cpus().Lengt根据电脑的idle，配置当前
+
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name]);
@@ -21,6 +22,7 @@ module.exports = merge(baseWebpackConfig, {
   },
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
+  mode: 'development', //development  production ( 生产环境会将代码压缩 )
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
