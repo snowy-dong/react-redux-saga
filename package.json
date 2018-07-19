@@ -8,8 +8,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "webpack",
-    "dev1": "webpack-dev-server --content-base src  --port 8000",
+    "start": "node build/dev-server.js",
     "dev": "node build/dev-server.js",
     "start1": "node build/dev-server.js",
     "build": "node build/build.js",
