@@ -13,7 +13,7 @@ export default class Footer extends React.Component{
           <Col xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}><Link to="/"><i className="iconfont icon-dibudaohanglan_xingqiu_tiaozhuanfaxianye" /><br/>星球</Link></Col>
           <Col xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}><Link to="/Discovery"><i className="iconfont icon-faxian" /><br/>发现</Link></Col>
           <Col xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}><Link to="/MyZone"><i className="iconfont icon-icon" /><br/>我的</Link></Col>
-      </Row>
+       </Row>
      </div>
       );
     }
