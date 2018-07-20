@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import StarCarousel from 'components/carousel'
 import { Row, Col, Icon, Avatar } from 'antd'
+import HotTheme from 'components/hotTheme'
 import './home.less'
 export default class Home extends React.Component{
   constructor(props){
@@ -10,7 +11,6 @@ export default class Home extends React.Component{
   render(){
     return (
       <div className="home">
-        <StarCarousel/>
           <div  className="Portals" >
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
@@ -38,6 +38,9 @@ export default class Home extends React.Component{
                 <Link className="link" to="/"> <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></Link>
               </Col>
             </Row>
+          </div>
+          <div className="hotTheme">
+            <HotTheme/>
           </div>
       </div>
     )
