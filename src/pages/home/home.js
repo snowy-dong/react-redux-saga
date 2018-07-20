@@ -11,6 +11,7 @@ export default class Home extends React.Component{
   render(){
     return (
       <div className="home">
+          <StarCarousel/>
           <div  className="Portals" >
             <Row gutter={16}>
               <Col className="gutter-row" span={6}>
