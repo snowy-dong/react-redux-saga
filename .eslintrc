@@ -20,7 +20,7 @@
   ],
   "rules": {
       "semi": [
-          "error",
+          "waning",
           "always"
       ],              
       "no-debugger": "error",//不允许用debugger这个关键字
