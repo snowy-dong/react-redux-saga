@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col, Icon } from 'antd'
 import { Link } from 'react-router-dom'
-import Home from 'pages/home'
-import AnimalStar from 'pages/animalStar'
-import MyZone from 'pages/myZone'
+import Home from 'containers/home'
+import AnimalStar from 'containers/animalStar'
+import MyZone from 'containers/myZone'
 import './footer.less'
 export default class Footer extends React.Component{
   render(){
