@@ -11,7 +11,8 @@ function resolve (dir) {
 }
 module.exports = {
   entry: {
-    app: ['./src/main.js']
+    app: ['./src/main.js'],
+    vendor: ['react', 'react-dom', 'prop-types', 'react-router-dom', 'redux', 'react-redux']
   },
   output: {
     path: config.build.assetsRoot,
@@ -51,7 +52,7 @@ module.exports = {
         // 解析css文件 
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],// use从右往左写  
+          use: [MiniCssExtractPlugin.loader,'style-loader', 'css-loader'],// use从右往左写  
           include:path.join(__dirname,'./src'),
           exclude:/node_modules/
         },

@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import {Link,Route,BrowserRouter as Router} from 'react-router-dom'
 import { DatePicker } from 'antd'
-import 'antd/dist/antd.css'
+require('antd/dist/antd.css')
 import Home from 'containers/home'
 import Hot from 'containers/hot'
 import Footer from 'components/footer'
 import AnimalStar from 'containers/animalStar'
 import Discovery from 'containers/discovery'
 import MyZone from 'containers/myZone'
-import './static/css/index.less'
-
+require('./static/css/index.css')
 export default class App extends Component{
   static defaultProps= {
     name:"SunnyChuan",
