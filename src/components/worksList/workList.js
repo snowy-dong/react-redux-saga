@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Works from './Works'
 
-class  List extends React.Component {
+class  WorksList extends React.Component {
   constructor(props){
     super(props)
   }
@@ -23,7 +23,7 @@ class  List extends React.Component {
     )
   }
 }
-List.propTypes = {
+WorksList.propTypes = {
   workslist: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -34,15 +34,11 @@ List.propTypes = {
 }
 
 const mapStateToProps = state => {
-  console.log(state.workList)
-  console.log('state.workList')
   return {
     workslist: state.workList
   }
 }
 
-const WorksList = connect(
+export default connect(
   mapStateToProps
-)(List)
-
-export default WorksList
+)(WorksList)

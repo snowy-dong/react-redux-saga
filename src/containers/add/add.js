@@ -47,5 +47,4 @@ const Option = Select.Option;
     );
   }
 }
-Add = connect()(Add)
-export default Add
+export default connect()(Add)
