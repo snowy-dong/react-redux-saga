@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+require('./myZone.less')
 const mapStateToProps = state => {
   return {
     workslist: state.workList
