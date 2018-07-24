@@ -17,7 +17,6 @@ export const hot = (props) => (
     {(Container) => <Container {...props}/>}
   </Bundle>
 )
-
 export const animalStar = (props) => (
   <Bundle load={AnimalStar}>
     {(Container) => <Container {...props}/>}
