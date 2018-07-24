@@ -1,18 +1,12 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import Footer from 'components/footer'
 import {Link,Route,BrowserRouter as Router} from 'react-router-dom'
 import { DatePicker } from 'antd'
 require('antd/dist/antd.css')
-import Home from 'containers/home'
-import Hot from 'containers/hot'
-import Footer from 'components/footer'
-import AnimalStar from 'containers/animalStar'
-import Discovery from 'containers/discovery'
-import MyZone from 'containers/myZone'
-import Message from 'containers/message'
-import Add from 'containers/add'
 require('./static/css/index.css')
+import { home, hot, animalStar, discovery, myZone, message, add } from './router'
 export default class App extends Component{
   static defaultProps= {
     name:"SunnyChuan",
@@ -26,13 +20,13 @@ export default class App extends Component{
     return (
       (<Router>
         <div>
-          <Route  exact path="/" component={Home}></Route>
-          <Route path="/hot" component={Hot} ></Route>
-          <Route path="/AnimalStar" component={AnimalStar} ></Route>
-          <Route path="/Discovery" component={Discovery} ></Route>
-          <Route path="/MyZone" component={MyZone} ></Route>
-          <Route path="/Message" component={Message} ></Route>
-          <Route path="/Add" component={Add} ></Route>
+          <Route  exact path="/" component={home}></Route>
+          <Route path="/hot" component={hot} ></Route>
+          <Route path="/animalStar" component={animalStar} ></Route>
+          <Route path="/discovery" component={discovery} ></Route>
+          <Route path="/myZone" component={myZone} ></Route>
+          <Route path="/message" component={message} ></Route>
+          <Route path="/add" component={add} ></Route>
           <Footer/>
         </div>
       </Router>)

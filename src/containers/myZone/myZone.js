@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Avatar } from 'antd'
 require('./myZone.less')
 const mapStateToProps = state => {
   return {
@@ -18,7 +19,7 @@ const mapStateToProps = state => {
             <li  key={index}> {works.text}</li>
           ))}
         </ul>
-        个人中心
+        <Avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       </div>
     )
   }

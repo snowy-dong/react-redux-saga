@@ -19,7 +19,8 @@ module.exports = {
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+    chunkFilename: '[name].[id].js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', 'less'],
@@ -33,6 +34,16 @@ module.exports = {
   },
   module: {
     rules: [
+        {
+          test: /\.bundle\.js$/,
+          loader: 'bundle-loader',
+          include:path.join(__dirname,'./src/containers'),
+          exclude:/node_modules/,
+          options: {
+              lazy: true,
+              name: '[name]'
+          }
+        },
         {
           test:/\.jsx?$/,
           use: {
