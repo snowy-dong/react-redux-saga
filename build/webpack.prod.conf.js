@@ -5,70 +5,50 @@ var webpack = require('webpack');
 var config = require('../config');
 var merge = require('webpack-merge');
 var baseWebpackConfig = require('./webpack.base.conf');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-var loadMinified = require('./load-minified');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var cleanWebpaclPlugin = require('clean-webpack-plugin');
-var env = config.build.env;
+var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //独立打包css文件插件
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+var Happypack = require('happypack');
+var happypackThreadPool = Happypack.ThreadPool({size:4});//size:os.cpus().Lengt根据电脑的idle，配置当前
 
-var webpackConfig = merge(baseWebpackConfig, {
+ var webpackConfig= merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: false,
-      extract: true
+    rules: utils.styleLoaders({ 
+      sourceMap: false
     })
   },
-  devtool: false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  // cheap-module-eval-source-map is faster for development
+  devtool: false,
   mode: 'production', //development  production ( 生产环境会将代码压缩 )
   plugins: [
     new cleanWebpaclPlugin(path.join(__dirname,'dist')),
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': config.build.env
     }),
-    // extract css into its own file
-    new ExtractTextPlugin({
-      filename: utils.assetsPath('css/[name].css')
-    }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
+    new webpack.NoEmitOnErrorsPlugin(),
     new OptimizeCSSPlugin({
       assetNameRegExp: /\.style\.css$/g,
       cssProcessor: require('cssnano'),
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.build.index,
+      filename: 'index.html',
       template: './src/index.html',
       inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency',
-      serviceWorkerLoader: `<script>${loadMinified(path.join(__dirname,
-        './service-worker-prod.js'))}</script>`
+      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+        './service-worker-dev.js'), 'utf-8')}</script>`
     }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
-    // copy custom static assets
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../src/static'),//静态资源目录源地址
@@ -83,6 +63,17 @@ var webpackConfig = merge(baseWebpackConfig, {
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
       stripPrefix: 'dist/'
+    }),
+    new MiniCssExtractPlugin({//选项与htmlPlugin类似
+      filename: "index.css"
+    }),
+    new FriendlyErrorsPlugin(),
+    new Happypack({
+      id:"happybabel",
+      loaders:['babel-loader'],
+      threadPool:happypackThreadPool,
+      cache:true,
+      verbose:true
     })
   ],
    //压缩js
@@ -145,5 +136,4 @@ if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
-
-module.exports = webpackConfig;
+module.exports = webpackConfig
