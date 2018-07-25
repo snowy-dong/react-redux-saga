@@ -1,7 +1,8 @@
 import React from 'react';
 import { List, Avatar } from 'antd'
 require('./message.less')
-
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 const data = [
   {
     title: 'Ant Design Title 1',
@@ -28,7 +29,6 @@ const data = [
     title: 'Ant Design Title 4',
   },
 ];
-
 export default class message extends React.Component{
   constructor(props){
     super(props)
@@ -40,13 +40,13 @@ export default class message extends React.Component{
           itemLayout="horizontal"
           dataSource={data}
           renderItem={item => (
-            <List.Item>
-              <List.Item.Meta
+            <ListItem>
+              <ListItemMeta
                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                 title={<a href="https://ant.design">{item.title}</a>}
                 description="Ant Design, a design language for background applications, is refined by Ant UED Team"
               />
-            </List.Item>
+            </ListItem>
           )}
         />
     </div>

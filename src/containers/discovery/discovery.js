@@ -18,6 +18,8 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 
 export default class Discovery extends React.Component{
   constructor(props){
@@ -32,18 +34,18 @@ export default class Discovery extends React.Component{
           dataSource={listData}
           footer={<div><b>ant design</b> footer part</div>}
           renderItem={item => (
-            <List.Item
+            <ListItem
               key={item.title}
               actions={[<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
               extra={<img  alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
             >
-              <List.Item.Meta
+              <ListItemMeta
                 avatar={<Avatar src={item.avatar} />}
                 title={<a href={item.href}>{item.title}</a>}
                 description={item.description}
               />
               {item.content}
-            </List.Item>
+            </ListItem>
             )}
           />
       </div>

@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import Bundle from './bundle'
-import Home from 'bundle-loader?lazy!containers/home'
-import Hot from 'bundle-loader?lazy!containers/hot'
-import AnimalStar from 'bundle-loader?lazy!containers/animalStar'
-import Discovery from 'bundle-loader?lazy!containers/discovery'
-import MyZone from 'bundle-loader?lazy!containers/myZone'
-import Message from 'bundle-loader?lazy!containers/message'
-import Add from 'bundle-loader?lazy!containers/add'
+import Home from 'bundle-loader?lazy&name=home!containers/home'
+import Hot from 'bundle-loader?lazy&name=hot!containers/hot'
+import AnimalStar from 'bundle-loader?lazy&name=animalStar!containers/animalStar'
+import Discovery from 'bundle-loader?lazy&name=discovery!containers/discovery'
+import MyZone from 'bundle-loader?lazy&name=myZone!containers/myZone'
+import Message from 'bundle-loader?lazy&name=message!containers/message'
+import Add from 'bundle-loader?lazy&name=add!containers/add'
 export const home = (props) => (
   <Bundle load={Home}>
     {(Container) => <Container {...props}/>}
